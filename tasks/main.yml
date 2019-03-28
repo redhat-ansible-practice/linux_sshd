@@ -1,0 +1,14 @@
+---
+# tasks file for linux_sshd
+
+
+  - name: template sshd_config
+    become: true
+    template:
+      src: "sshd_config.conf.j2"
+      dest: "/etc/ssh/sshd_config"
+      mode: 0600
+      owner: root
+      group: root
+      valute: "/usr/sbin/sshd -T -f %s"
+    notify: restart sshd
